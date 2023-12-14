@@ -1,0 +1,17 @@
+items:
+- id: 128048
+  name: Alligator Hide Wrap
+  eqtc: 0
+  alla: 99999
+  sold_by:
+  - none
+  quest_rewarded:
+  - none
+  quest_reagent:
+  - none
+  dropped_by:
+  - Bonecracker#beastdomain
+  recipe_rewarded:
+  - none
+  recipe_reagent:
+  - none
