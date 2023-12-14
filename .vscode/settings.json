@@ -1,0 +1,11 @@
+{
+    "yaml.completion": true,
+    "yaml.format.enable": true,
+    "yaml.schemas": {
+        ".vscode/schemas/item.json": ["db/item/**/*.yaml"],
+        ".vscode/schemas/merchant.json": ["db/merchant/**/*.yaml"],
+        ".vscode/schemas/npc.json": ["db/npc/**/*.yaml"],
+        ".vscode/schemas/quest.json": ["db/quest/**/*.yaml"],
+    },
+    "files.trimTrailingWhitespace": true
+}

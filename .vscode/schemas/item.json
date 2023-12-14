@@ -1,0 +1,75 @@
+{
+    "$id": "https://json.schemastore.org/workflows.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Item Schema",
+    "type": "object",
+    "properties": {
+        "items": {
+            "type": "array",
+            "description": "List of items",
+            "items": {
+                "required": [
+                    "id",
+                    "name",
+                    "eqtc",
+                    "alla",
+                    "sold_by",
+                    "quest_rewarded",
+                    "quest_reagent",
+                    "dropped_by"
+                ],
+                "type":"object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Item ID"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Item name"
+                    },
+                    "eqtc": {
+                        "type": "integer",
+                        "description": "Item EQTC ID"
+                    },
+                    "alla": {
+                        "type": "integer",
+                        "description": "Item Alla ID"
+                    },
+                    "sold_by": {
+                        "type": "array",
+                        "description": "List of NPCs that sell this item",
+                        "items": {
+                            "type": "string",
+                            "description": "NPC name"
+                        }
+                    },
+                    "quest_rewarded": {
+                        "type": "array",
+                        "description": "List of quests that reward this item",
+                        "items": {
+                            "type": "string",
+                            "description": "Quest name"
+                        }
+                    },
+                    "quest_reagent": {
+                        "type": "array",
+                        "description": "List of quests that require this item as a reagent",
+                        "items": {
+                            "type": "string",
+                            "description": "Quest name"
+                        }
+                    },
+                    "dropped_by": {
+                        "type": "array",
+                        "description": "List of NPCs that drop this item",
+                        "items": {
+                            "type": "string",
+                            "description": "NPC name"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

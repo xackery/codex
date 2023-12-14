@@ -1,0 +1,39 @@
+{
+    "$id": "https://json.schemastore.org/workflows.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "NPC Schema",
+    "type": "object",
+    "properties": {
+        "npcs": {
+            "type": "array",
+            "description": "List of npcs",
+            "items": {
+                "required": [
+                    "name",
+                    "alla",
+                    "min",
+                    "max"
+                ],
+                "type":"object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "NPC name"
+                    },
+                    "alla": {
+                        "type": "integer",
+                        "description": "NPC Alla ID"
+                    },
+                    "min": {
+                        "type": "integer",
+                        "description": "NPC Min Level"
+                    },
+                    "max": {
+                        "type": "integer",
+                        "description": "NPC Max Level"
+                    }
+                }
+            }
+        }
+    }
+}

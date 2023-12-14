@@ -1,0 +1,29 @@
+{
+  "$id": "https://json.schemastore.org/workflows.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Merchant Schema",
+  "type": "object",
+  "properties": {
+      "merchants": {
+          "type": "array",
+          "description": "List of merchants",
+          "required": [
+            "name",
+            "loc"
+          ],
+          "items": {
+              "type":"object",
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "description": "Merchant name"
+                  },
+                  "loc": {
+                      "type": "string",
+                      "description": "Merchant Location"
+                  }
+              }
+          }
+      }
+  }
+}

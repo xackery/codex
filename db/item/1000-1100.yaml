@@ -1,0 +1,17 @@
+items:
+- id: 1001
+  name: cloth cap
+  eqtc: 23425
+  alla: 1395
+  sold_by:
+  - Syltbel_Bastlan#abysmal
+  quest_rewarded:
+  - memory_crystal#poknowledge
+  quest_reagent:
+  - none
+  dropped_by:
+  - a_zombie#befallen
+  recipe_rewarded:
+  - none
+  recipe_reagent:
+  - none

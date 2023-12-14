@@ -1,0 +1,6 @@
+quests:
+- id: memory_crystal
+  name: Memory In Crystal - Veeshan's Favor
+  alla: 4837
+  min: 15
+  max: 125
