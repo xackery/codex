@@ -40015,8 +40015,8 @@ items:
       - unknown
     recipe_reagent:
       - unknown
-  - id: 0
-    name: Iksar Right Hand '=\
+  - id: 12797
+    name: Iksar Right Hand '=\|-'
     eqtc: 0
     alla: 0
     sold_by:
@@ -40031,8 +40031,8 @@ items:
       - unknown
     recipe_reagent:
       - unknown
-  - id: 0
-    name: Iksar Left Hand '=\
+  - id: 12798
+    name: Iksar Left Hand '=\|-'
     eqtc: 0
     alla: 0
     sold_by:
@@ -40047,8 +40047,8 @@ items:
       - unknown
     recipe_reagent:
       - unknown
-  - id: 0
-    name: Iksar Left Hand '=\
+  - id: 12799
+    name: Iksar Left Hand '=\|-'
     eqtc: 0
     alla: 0
     sold_by:

@@ -219,10 +219,21 @@ func convertItems() error {
 		}
 
 		item.Name = records[1]
+
+		if item.ID == 0 && strings.Contains(item.Name, "Iksar") {
+			item.ID, err = strconv.Atoi(records[6])
+			if err != nil {
+				return fmt.Errorf("line %d: %w", lineNumber, err)
+			}
+			item.Name += "|" + records[2]
+			//fmt.Println("overrode item id 0 with ", item.ID, "on name", item.Name)
+		}
+
 		if item.ID-lastRange-5000 < 0 {
 			itemFile.Entry = append(itemFile.Entry, item)
 			continue
 		}
+
 		maxValue := item.ID
 		// round maxValue down to nearest 1000
 		maxValue = maxValue - (maxValue % 1000) - 1
@@ -241,8 +252,19 @@ func convertItems() error {
 		}
 		itemFile = &itemStruct{}
 		lastRange = item.ID
-		itemFile.Entry = append(itemFile.Entry, item)
 
+		for _, entry := range recipeFile.Entry {
+			if entry.ResultID == item.ID {
+				item.RecipeRewarded = append(item.RecipeRewarded, fmt.Sprintf("%s|%d|%d", entry.Name, entry.ID, entry.OtherID))
+			}
+			for _, component := range entry.Components {
+				if component.ItemID == item.ID {
+					item.RecipeReagent = append(item.RecipeReagent, fmt.Sprintf("%s|%d|%d", entry.Name, entry.ID, entry.OtherID))
+				}
+			}
+		}
+
+		itemFile.Entry = append(itemFile.Entry, item)
 	}
 
 	return nil

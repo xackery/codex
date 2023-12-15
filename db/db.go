@@ -104,7 +104,7 @@ func ParseItems(items map[int]*Item) error {
 
 			_, ok := items[item.ID]
 			if ok {
-				return fmt.Errorf("duplicate item id: %d", item.ID)
+				return fmt.Errorf("duplicate item id %d on %s", item.ID, path)
 			}
 
 			items[item.ID] = &item
