@@ -1,0 +1,9 @@
+npcs:
+- name: a_black_wolf
+  min: 88
+  max: 88
+  alla: 36428
+- name: a_snow_wolf
+  min: 88
+  max: 88
+  alla: 36437

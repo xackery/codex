@@ -1,0 +1,5 @@
+npcs:
+- name: a_wolf
+  min: 88
+  max: 90
+  alla: 36678

@@ -1,0 +1,17 @@
+items:
+- id: 0
+  name: Unknown
+  eqtc: 0
+  alla: 0
+  sold_by:
+  - unknown
+  quest_rewarded:
+  - unknown
+  quest_reagent:
+  - unknown
+  dropped_by:
+  - unknown
+  recipe_rewarded:
+  - unknown
+  recipe_reagent:
+  - unknown

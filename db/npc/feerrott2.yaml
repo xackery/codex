@@ -1,0 +1,5 @@
+npcs:
+- name: a tanglefang hunter
+  min: 83
+  max: 85
+  alla: 35870

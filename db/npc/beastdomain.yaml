@@ -1,0 +1,9 @@
+npcs:
+- name: Bonecracker
+  min: 88
+  max: 88
+  alla: 35793
+- name: a naeya scavenger
+  min: 93
+  max: 93
+  alla: 38195

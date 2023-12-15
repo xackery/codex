@@ -1,0 +1,13 @@
+npcs:
+- name: an_abandoned_cormolant
+  min: 88
+  max: 88
+  alla: 42952
+- name: an abandoned naeya
+  min: 88
+  max: 88
+  alla: 38222
+- name: Keramar the Naeya
+  min: 93
+  max: 93
+  alla: 38195

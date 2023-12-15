@@ -1,0 +1,9 @@
+npcs:
+- name: a_dire_wolf
+  min: 96
+  max: 97
+  alla: 41533
+- name: a_savage_dire_wolf
+  min: 97
+  max: 98
+  alla: 41548

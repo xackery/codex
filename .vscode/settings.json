@@ -6,6 +6,7 @@
         ".vscode/schemas/merchant.json": ["db/merchant/**/*.yaml"],
         ".vscode/schemas/npc.json": ["db/npc/**/*.yaml"],
         ".vscode/schemas/quest.json": ["db/quest/**/*.yaml"],
+        ".vscode/schemas/recipe.json": ["db/recipe/**/*.yaml"],
     },
     "files.trimTrailingWhitespace": true
 }

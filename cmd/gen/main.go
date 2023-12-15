@@ -15,6 +15,7 @@ var (
 	merchants = make(map[string]*db.Merchant)
 	npcs      = make(map[string]*db.Npc)
 	quests    = make(map[string]*db.Quest)
+	recipes   = make(map[int]*db.Recipe)
 )
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 }
 
 func run() error {
-	err := parseItems()
+	err := db.ParseItems(items)
 	if err != nil {
 		return fmt.Errorf("parseItems: %w", err)
 	}
@@ -44,9 +45,14 @@ func run() error {
 		return fmt.Errorf("parseQuests: %w", err)
 	}
 
+	err = parseRecipes()
+	if err != nil {
+		return fmt.Errorf("parseRecipes: %w", err)
+	}
+
 	for _, item := range items {
 		for _, merchantName := range item.SoldBy {
-			if merchantName == "none" {
+			if merchantName == "none" || merchantName == "unknown" {
 				continue
 			}
 			merchant := merchants[merchantName]
@@ -55,6 +61,37 @@ func run() error {
 			}
 			merchant.Items = append(merchant.Items, item.ID)
 		}
+
+		for _, questName := range item.QuestRewarded {
+			if questName == "none" || questName == "unknown" {
+				continue
+			}
+			quest := quests[questName]
+			if quest == nil {
+				return fmt.Errorf("quest %s not found", questName)
+			}
+		}
+
+		for _, questName := range item.QuestReagent {
+			if questName == "none" || questName == "unknown" {
+				continue
+			}
+			quest := quests[questName]
+			if quest == nil {
+				return fmt.Errorf("quest %s not found", questName)
+			}
+		}
+
+		for _, npcName := range item.DroppedBy {
+			if npcName == "none" || npcName == "unknown" {
+				continue
+			}
+			npc := npcs[npcName]
+			if npc == nil {
+				return fmt.Errorf("npc %s not found", npcName)
+			}
+		}
+
 	}
 
 	for _, merchant := range merchants {
@@ -69,42 +106,6 @@ func run() error {
 		fmt.Printf("%+v\n", npc)
 	}
 
-	return nil
-}
-
-func parseItems() error {
-	err := filepath.WalkDir("db/item/", func(path string, d os.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if d.IsDir() {
-			return nil
-		}
-		if filepath.Ext(path) != ".yaml" {
-			return nil
-		}
-		r, err := os.Open(path)
-		if err != nil {
-			return fmt.Errorf("open: %w", err)
-		}
-		defer r.Close()
-		type itemStruct struct {
-			Entry []db.Item `yaml:"items"`
-		}
-		itemFile := &itemStruct{}
-		err = yaml.NewDecoder(r).Decode(itemFile)
-		if err != nil {
-			return fmt.Errorf("decode: %w", err)
-		}
-		for i := range itemFile.Entry {
-			item := itemFile.Entry[i]
-			items[item.ID] = &item
-		}
-		return nil
-	})
-	if err != nil {
-		return fmt.Errorf("walkdir: %w", err)
-	}
 	return nil
 }
 
@@ -132,10 +133,9 @@ func parseMerchants() error {
 		if err != nil {
 			return fmt.Errorf("decode: %w", err)
 		}
-		basePath := strings.TrimSuffix(filepath.Base(path), ".yaml")
 		for i := range merchantFile.Entry {
 			merchant := merchantFile.Entry[i]
-			merchant.Name = merchant.Name + "#" + basePath
+			merchant.Name = zonify(merchant.Name, path)
 			merchants[merchant.Name] = &merchant
 		}
 		return nil
@@ -172,6 +172,7 @@ func parseNpcs() error {
 		}
 		for i := range npcFile.Entry {
 			npc := npcFile.Entry[i]
+			npc.Name = zonify(npc.Name, path)
 			npcs[npc.Name] = &npc
 			//fmt.Printf("%+v\n", npc)
 		}
@@ -209,6 +210,7 @@ func parseQuests() error {
 		}
 		for i := range questFile.Entry {
 			quest := questFile.Entry[i]
+			quest.ID = zonify(quest.ID, path)
 			quests[quest.ID] = &quest
 			//fmt.Printf("%+v\n", quest)
 		}
@@ -216,6 +218,33 @@ func parseQuests() error {
 	})
 	if err != nil {
 		return fmt.Errorf("walkdir: %w", err)
+	}
+	return nil
+}
+
+func zonify(name string, path string) string {
+	zone := strings.TrimSuffix(filepath.Base(path), ".yaml")
+	return strings.ReplaceAll(name, " ", "_") + "#" + zone
+}
+
+func parseRecipes() error {
+	r, err := os.Open("db/recipe.yaml")
+	if err != nil {
+		return fmt.Errorf("open: %w", err)
+	}
+	defer r.Close()
+	type recipeStruct struct {
+		Entry []db.Recipe `yaml:"recipes"`
+	}
+	recipeFile := &recipeStruct{}
+	err = yaml.NewDecoder(r).Decode(recipeFile)
+	if err != nil {
+		return fmt.Errorf("decode: %w", err)
+	}
+	for i := range recipeFile.Entry {
+		recipe := recipeFile.Entry[i]
+		recipes[recipe.ID] = &recipe
+		//fmt.Printf("%+v\n", recipe)
 	}
 	return nil
 }

@@ -1,0 +1,29 @@
+{
+    "$id": "https://json.schemastore.org/workflows.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "NPC Schema",
+    "type": "object",
+    "properties": {
+        "recipes": {
+            "type": "array",
+            "description": "List of recipes",
+            "items": {
+                "required": [
+                    "name",
+                    "id"
+                ],
+                "type":"object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "recipe ID"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "recipe name"
+                    }
+                }
+            }
+        }
+    }
+}
